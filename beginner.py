@@ -54,38 +54,37 @@
 # In[1]:
 
 from __future__ import absolute_import, division, print_function, unicode_literals
-import os, sys
+import os, sys, traceback
 print ("Check to make sure we are in the correct virtual environment:")
+
 try:
     print (sys.real_prefix)
 except:
     print ("Please run in a virtual environment")
-    exit()
-    0/0       #ipython ignores exit()!!
+    sys.exit()
+
 for py in sys.path:
     if "python3" in py:
         print(py)
         break
 if "anaconda" in py:
     print ("Anaconda should be overridden with a virtualenv called 'venv'")
-    exit()
-    0/0       #ipython ignores exit()!!
+    sys.exit()
+
 if "venv" not in py:
     print ("Please use the convention that your virtualenv is called 'venv'")
-    exit()
-    0/0       #ipython ignores exit()!!
-    
+    sys.exit()
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = "2"             #reduce tf's blabbering to a dull roar
+
 import tensorflow as tf
 print ("Tensorflow version:", tf.version.VERSION)
 try:
     print ("Test for gpu:", tf.test.is_gpu_available())
 except:
-    print ("GPU is installed but something is wrong")
-    exit()
-    0/0       #ipython ignores exit()!!
-    
-exit()
-0/0       #ipython ignores exit()!!
+    traceback.print_exc()
+    print ("GPU is installed but something is wrong. Possibly another tensorflow session is active, for instance if you are running a Jupyter kernel on this machine")
+    sys.exit()
 
 # Load and prepare the [MNIST dataset](http://yann.lecun.com/exdb/mnist/). Convert the samples from integers to floating-point numbers:
 
