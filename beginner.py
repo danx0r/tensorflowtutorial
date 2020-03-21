@@ -75,6 +75,12 @@ if "venv" not in py:
     print ("Please use the convention that your virtualenv is called 'venv'")
     sys.exit()
 
+i = os.environ['PATH'].find("venv")
+j = os.environ['PATH'].find(":")
+if i > j:
+    print ("your PATH doesn't look good, try running the virtualenv locally")
+    sys.exit()
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = "2"             #reduce tf's blabbering to a dull roar
 
 import tensorflow as tf
