@@ -55,25 +55,6 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 import os, sys, traceback
-print ("Check to make sure we are in the correct virtual environment:")
-
-try:
-    print (sys.real_prefix)
-except:
-    print ("Please run in a virtual environment")
-    sys.exit()
-
-for py in sys.path:
-    if "python3" in py:
-        print(py)
-        break
-if "anaconda" in py:
-    print ("Anaconda should be overridden with a virtualenv called 'venv'")
-    sys.exit()
-
-if "venv" not in py:
-    print ("Please use the convention that your virtualenv is called 'venv'")
-    sys.exit()
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = "2"             #reduce tf's blabbering to a dull roar
 
