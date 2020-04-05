@@ -56,10 +56,21 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 import os, sys, traceback
 
+i = os.environ['PATH'].find("venv")
+j = os.environ['PATH'].find(":")
+if i > j:
+    print ("your PATH doesn't look good, try running the virtualenv locally")
+    sys.exit()
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = "2"             #reduce tf's blabbering to a dull roar
 
 import tensorflow as tf
-print ("Tensorflow version:", tf.version.VERSION)
+ver = tf.version.VERSION
+print ("Tensorflow version:", ver)
+if ver[0] != "2":
+    print ("This program requires tensorflow 2.x")
+    sys.exit()
+
 try:
     print ("Test for gpu:", tf.test.is_gpu_available())
 except:
