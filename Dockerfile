@@ -8,6 +8,10 @@ RUN virtualenv venv -p python3
 
 ENV PATH="venv/bin:$PATH"
 
-RUN pip install mido
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY beginner.py .
 
 ENTRYPOINT ["bash"]
