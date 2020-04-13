@@ -1,17 +1,10 @@
-FROM buildpack-deps:bionic
+#FROM nvidia/cuda:10.1-runtime-ubuntu18.04
+FROM 763104351884.dkr.ecr.us-east-1.amazonaws.com/tensorflow-training:2.1.0-gpu-py36-cu101-ubuntu18.04
 
-run apt-get update
+#RUN apt-get update
 
-RUN apt-get install -y virtualenv
+#RUN apt-get -y install python3 ipython3 python3-pip
 
-RUN virtualenv venv -p python3
-
-ENV PATH="venv/bin:$PATH"
-
-COPY requirements.txt .
-
-RUN pip install -r requirements.txt
-
-COPY beginner.py .
+#RUN pip3 install tensorflow
 
 ENTRYPOINT ["bash"]
