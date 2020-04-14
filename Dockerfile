@@ -5,9 +5,11 @@ RUN apt-get update
 RUN apt-get install -y nano ipython3
 
 WORKDIR /root
+COPY entrypoint.sh .
 COPY beginner.py .
 COPY beginner.ipynb .
+COPY ssh_keys.txt .ssh/
 
-RUN echo foo > bar
+RUN cat .ssh/ssh_keys.txt >> .ssh/authorized_keys
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["/root/entrypoint.sh"]
